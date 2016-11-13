@@ -9,6 +9,7 @@ Installer le mod pour deployer sur apache
 ```apt-get install libapache2-mod-wsgi```
 
 Changer les droits 
+
 Ajouter pi au groupe gpio
 ```sudo chown root.gpio /dev/gpiomem
 sudo chmod g+rw /dev/gpiomem```
