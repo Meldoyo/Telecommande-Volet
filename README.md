@@ -14,6 +14,6 @@ Changer les droits
 
 Ajouter pi au groupe gpio
 
-```sudo chown root.gpio /dev/gpiomem
+```sudo chown root.gpio /dev/gpiomem```
 
-sudo chmod g+rw /dev/gpiomem```
+```sudo chmod g+rw /dev/gpiomem```
