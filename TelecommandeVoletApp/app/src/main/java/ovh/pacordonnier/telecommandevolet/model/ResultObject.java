@@ -1,7 +1,7 @@
 package ovh.pacordonnier.telecommandevolet.model;
 
 /**
- * Created by pcordonnier on 13/11/16.
+ * Created by pcordonnier up 13/11/16.
  */
 
 public class ResultObject {

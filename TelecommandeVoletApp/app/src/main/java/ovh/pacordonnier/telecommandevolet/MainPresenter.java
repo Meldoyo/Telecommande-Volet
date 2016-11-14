@@ -1,13 +1,16 @@
 package ovh.pacordonnier.telecommandevolet;
 
+import java.util.List;
+
 import ovh.pacordonnier.telecommandevolet.model.APIService;
 import ovh.pacordonnier.telecommandevolet.model.ResultObject;
+import ovh.pacordonnier.telecommandevolet.model.Room;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by pcordonnier on 13/11/16.
+ * Created by pcordonnier up 13/11/16.
  */
 
 public class MainPresenter implements Presenter<MainView> {
@@ -23,11 +26,29 @@ public class MainPresenter implements Presenter<MainView> {
         mainView = null;
     }
 
-    public void on() {
+    public void get() {
         if (mainView != null) {
             TelecommandeApplication telecommandeApplication = TelecommandeApplication.get(mainView.getContext());
             APIService apiService = telecommandeApplication.getApiService();
-            apiService.on().enqueue(new Callback<ResultObject   >() {
+            apiService.get().enqueue(new Callback<List<Room>>() {
+                @Override
+                public void onResponse(Call<List<Room>> call, Response<List<Room>> response) {
+                    mainView.resultGet(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<Room>> call, Throwable t) {
+                    mainView.resultNotOk();
+                }
+            });
+        }
+    }
+
+    public void up(Room room) {
+        if (mainView != null) {
+            TelecommandeApplication telecommandeApplication = TelecommandeApplication.get(mainView.getContext());
+            APIService apiService = telecommandeApplication.getApiService();
+            apiService.on(room.getName()).enqueue(new Callback<ResultObject>() {
                 @Override
                 public void onResponse(Call<ResultObject> call, Response<ResultObject> response) {
                     mainView.resultOK();
@@ -41,11 +62,11 @@ public class MainPresenter implements Presenter<MainView> {
         }
     }
 
-    public void off() {
+    public void down(Room room) {
         if (mainView != null) {
             TelecommandeApplication telecommandeApplication = TelecommandeApplication.get(mainView.getContext());
             APIService apiService = telecommandeApplication.getApiService();
-            apiService.off().enqueue(new Callback<ResultObject>() {
+            apiService.off(room.getName()).enqueue(new Callback<ResultObject>() {
                 @Override
                 public void onResponse(Call<ResultObject> call, Response<ResultObject> response) {
                     mainView.resultOK();

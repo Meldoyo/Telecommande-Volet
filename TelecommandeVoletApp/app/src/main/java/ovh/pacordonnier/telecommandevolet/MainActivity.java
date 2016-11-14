@@ -3,26 +3,24 @@ package ovh.pacordonnier.telecommandevolet;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ovh.pacordonnier.telecommandevolet.model.Room;
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends AppCompatActivity implements MainView, MainAdapter.Callback{
 
     MainPresenter mainPresenter;
-
-    @OnClick(R.id.button_on)
-    public void buttonOnClicked() {
-        mainPresenter.on();
-
-    }
-
-    @OnClick(R.id.button_off)
-    public void buttonOffCLicked() {
-        mainPresenter.off();
-    }
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    MainAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +29,21 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mainPresenter = new MainPresenter();
         mainPresenter.attachView(this);
         ButterKnife.bind(this);
+        setupRecyclerView();
+        mainPresenter.get();
+    }
+
+    private void setupRecyclerView() {
+        adapter = new MainAdapter();
+        adapter.setCallback(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void resultGet(List<Room> rooms) {
+        adapter.setRooms(rooms);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -46,5 +59,22 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public void onNameClick(Room room) {
+
+    }
+
+    @Override
+    public void onUpClick(Room room) {
+        mainPresenter.up(room);
+        Log.d("TAG", "onUpClick");
+    }
+
+    @Override
+    public void onDownClick(Room room) {
+        mainPresenter.down(room);
+        Log.d("TAG", "onDownClick");
     }
 }

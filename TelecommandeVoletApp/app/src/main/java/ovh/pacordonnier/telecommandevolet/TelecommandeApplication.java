@@ -6,7 +6,7 @@ import android.content.Context;
 import ovh.pacordonnier.telecommandevolet.model.APIService;
 
 /**
- * Created by pcordonnier on 13/11/16.
+ * Created by pcordonnier up 13/11/16.
  */
 
 public class TelecommandeApplication extends Application {
