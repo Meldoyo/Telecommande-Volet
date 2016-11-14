@@ -1,19 +1,16 @@
 from flask import Flask, jsonify
-from gpiozero import LED
-from time import sleep
+from subprocess import call
 
 app = Flask(__name__)
-
-led = LED(11)
 
 dict = {'result': 'ok'}
 @app.route("/on")
 def on():
-	led.on()
+	call(["/usr/local/bin/send", "8", "12325261", "1", "on"])
 	return jsonify(**dict)
 @app.route("/off")
 def off():
-	led.off()
+	call(["/usr/local/bin/send", "8", "12325261", "1", "off"])
 	return jsonify(**dict)
 if __name__ == "__main__":
     app.run()
