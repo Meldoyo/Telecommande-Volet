@@ -6,7 +6,12 @@ package ovh.pacordonnier.telecommandevolet.model;
 
 public class Room {
     public String name;
-    public String id;
+
+    public String getCommonName() {
+        return common_name;
+    }
+
+    public String common_name;
 
     public String getName() {
         return name;

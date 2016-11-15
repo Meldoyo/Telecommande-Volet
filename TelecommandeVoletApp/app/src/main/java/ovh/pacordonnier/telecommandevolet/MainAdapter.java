@@ -52,7 +52,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.RoomViewHolder
     @Override
     public void onBindViewHolder(RoomViewHolder holder, int position) {
         holder.room = rooms.get(position);
-        holder.textRoomName.setText(rooms.get(position).getName());
+        holder.textRoomName.setText(rooms.get(position).getCommonName());
     }
 
     @Override
