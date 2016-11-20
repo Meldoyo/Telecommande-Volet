@@ -79,4 +79,40 @@ public class MainPresenter implements Presenter<MainView> {
             });
         }
     }
+
+    public void allDown() {
+        if (mainView != null) {
+            TelecommandeApplication telecommandeApplication = TelecommandeApplication.get(mainView.getContext());
+            APIService apiService = telecommandeApplication.getApiService();
+            apiService.allDown().enqueue(new Callback<ResultObject>() {
+                @Override
+                public void onResponse(Call<ResultObject> call, Response<ResultObject> response) {
+                    mainView.resultOK();
+                }
+
+                @Override
+                public void onFailure(Call<ResultObject> call, Throwable t) {
+                    mainView.resultNotOk();
+                }
+            });
+        }
+    }
+
+    public void allUp() {
+        if (mainView != null) {
+            TelecommandeApplication telecommandeApplication = TelecommandeApplication.get(mainView.getContext());
+            APIService apiService = telecommandeApplication.getApiService();
+            apiService.allUp().enqueue(new Callback<ResultObject>() {
+                @Override
+                public void onResponse(Call<ResultObject> call, Response<ResultObject> response) {
+                    mainView.resultOK();
+                }
+
+                @Override
+                public void onFailure(Call<ResultObject> call, Throwable t) {
+                    mainView.resultNotOk();
+                }
+            });
+        }
+    }
 }

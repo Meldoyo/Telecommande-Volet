@@ -29,5 +29,15 @@ def off():
 @app.route("/get")
 def get():
 	return Response(dumps(array), mimetype='application/json')
+@app.route("/allOn")
+def allOn():
+        for key, value in dictChambreNumero.iteritems():
+	    call(["/usr/local/bin/send", "8", value, "1", "on"])
+        return jsonify(**dict)
+@app.route("/allOff")
+def allOff():
+        for key, value in dictChambreNumero.iteritems():
+	    call(["/usr/local/bin/send", "8", value, "1", "off"])
+        return jsonify(**dict)
 if __name__ == "__main__":
     app.run()

@@ -76,6 +76,16 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAda
     }
 
     @Override
+    public void onAllDownClick() {
+        mainPresenter.allDown();
+    }
+
+    @Override
+    public void onAllUpClick() {
+        mainPresenter.allUp();
+    }
+
+    @Override
     public void onDownClick(Room room) {
         mainPresenter.down(room);
         Log.d("TAG", "onDownClick");
