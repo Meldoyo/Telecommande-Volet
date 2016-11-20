@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="ovh.pacordonnier.telecommandevolet.TelecommandeApplication">
-        <activity android:name="ovh.pacordonnier.telecommandevolet.MainActivity">
+        <activity android:name="ovh.pacordonnier.telecommandevolet.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

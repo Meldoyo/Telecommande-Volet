@@ -1,5 +1,8 @@
 package ovh.pacordonnier.telecommandevolet;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.List;
 
 import ovh.pacordonnier.telecommandevolet.model.APIService;
@@ -15,6 +18,7 @@ import retrofit2.Response;
 
 public class MainPresenter implements Presenter<MainView> {
     MainView mainView;
+    private String IP;
 
     @Override
     public void attachView(MainView view) {
@@ -114,5 +118,21 @@ public class MainPresenter implements Presenter<MainView> {
                 }
             });
         }
+    }
+
+    public String getIP() {
+        String byDefault = "default";
+        SharedPreferences sharedPreferences =
+            mainView.getContext().getSharedPreferences(byDefault, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("IP", null);
+    }
+
+    public void setIP(String IP) {
+        String byDefault = "default";
+        SharedPreferences sharedPreferences =
+                mainView.getContext().getSharedPreferences(byDefault, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("IP", IP);
+        editor.commit();
     }
 }

@@ -32,7 +32,7 @@ public interface APIService {
 
 
     class Factory {
-        public static APIService create() {
+        public static APIService create(String IP) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             // set your desired log level
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -41,7 +41,7 @@ public interface APIService {
             // add logging as last interceptor
             httpClient.addInterceptor(logging);  // <-- this is the important line!
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.39/")
+                    .baseUrl("http://" + IP)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
