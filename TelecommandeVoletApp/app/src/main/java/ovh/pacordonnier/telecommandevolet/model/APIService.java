@@ -25,7 +25,7 @@ public interface APIService {
     class Factory {
         public static APIService create() {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.155/")
+                    .baseUrl("http://192.168.0.39/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             return retrofit.create(APIService.class);
