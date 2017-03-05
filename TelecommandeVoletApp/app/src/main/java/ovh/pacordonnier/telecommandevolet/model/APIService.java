@@ -44,7 +44,7 @@ public interface APIService {
                     .baseUrl("http://" + IP)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
-                    .build();
+                    .build();""
             return retrofit.create(APIService.class);
         }
     }
